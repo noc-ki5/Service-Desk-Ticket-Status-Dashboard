@@ -8,10 +8,10 @@
             <meta http-equiv="Expires" content="0" />
 
             <title>Industrial Support Engine Dashboard</title>
-            <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries&v=20260521095108"></script>
+            <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries&v=20260521100044"></script>
             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
             <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-            <script src="https://cdn.jsdelivr.net/npm/apexcharts?v=20260521095108"></script>
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts?v=20260521100044"></script>
             <script id="tailwind-config">
                 tailwind.config = { theme: { extend: { colors: { "deep-navy": "#0F172A", "slate-grey": "#64748B", "soft-teal": "#0D9488", "muted-coral": "#E11D48", "bg-light": "#F8FAFC", "surface": "#ffffff", "border-light": "#E2E8F0" }, fontFamily: { "inter": ["Inter", "sans-serif"] }, boxShadow: { 'ambient': '0px 4px 20px rgba(15, 23, 42, 0.05)' } } } }
             </script>
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <span class="text-xs font-bold text-slate-grey uppercase tracking-wider bg-bg-light px-4 py-2 rounded-lg border border-border-light">Generated: May 21, 2026 - 09:51</span>
+                        <span class="text-xs font-bold text-slate-grey uppercase tracking-wider bg-bg-light px-4 py-2 rounded-lg border border-border-light">Generated: May 21, 2026 - 10:00</span>
                     </div>
                 </header>
 
@@ -142,6 +142,8 @@
             </div>
 
             <script>
+            // 100% CLEAN LEGEND FIX: NO MORE HIDDEN ORPHAN DOTS, NO MORE EXTRA PERCENTAGES
+            // ALL Categories will explicitly show mapping strictly as "Label: Count"
             const baseDonutOptions = {
                 chart: { type: 'donut', height: 420 },
                 dataLabels: { 
@@ -155,11 +157,11 @@
                     fontSize: '12px',
                     fontFamily: 'Inter',
                     fontWeight: 500,
+                    // Returns Clean Label mapping exactly to your image: "Category Name: Count"
+                    // WITHOUT any percentage or hidden condition logic. ALL labels will render purely.
                     formatter: function(seriesName, opts) {
-                        var total = opts.w.globals.seriesTotals.reduce((a, b) => a + b, 0);
-                        var value = opts.w.globals.series[opts.seriesIndex];
-                        var percentage = total === 0 ? 0 : Math.round((value / total) * 100);
-                        return percentage < 10 ? null : seriesName + ": " + value;
+                        var countValue = opts.w.globals.series[opts.seriesIndex];
+                        return seriesName + ": " + countValue; 
                     }
                 }
             };
