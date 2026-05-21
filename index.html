@@ -1,16 +1,146 @@
 
-        <!DOCTYPE html><html class="light" lang="en"><head><meta charset="utf-8"/><title>Dashboard</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/apexcharts"></script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/><style>body{background-color:#F8FAFC;font-family:'Inter',sans-serif;}</style></head>
-        <body class="p-8 space-y-6"><header class="flex justify-between items-center bg-white p-6 rounded-xl border border-slate-200"><div><h2 class="text-2xl font-bold text-slate-900">Service Desk Ticket Status Dashboard</h2><p class="text-sm text-slate-500">Range: May 01, 2026 to May 19, 2026</p></div><span class="text-xs font-bold bg-slate-100 p-2 rounded border">Generated: May 21, 2026 - 07:04</span></header>
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6"><div class="border-2 border-dashed border-indigo-200 bg-indigo-50/20 rounded-2xl p-4 relative"><span class="absolute -top-3 left-4 bg-indigo-600 text-white text-[11px] font-extrabold tracking-widest px-3 py-1 rounded-full uppercase">AI Tickets</span><div class="grid grid-cols-3 gap-3 mt-2"><div class="bg-white p-4 rounded-xl border border-slate-200"><p class="text-[10px] font-bold text-slate-400 uppercase">Total Tickets</p><h3 class="text-2xl font-bold">546</h3></div><div class="bg-white p-4 rounded-xl border border-slate-200"><p class="text-[10px] font-bold text-slate-400 uppercase">Resolved Tickets</p><h3 class="text-2xl font-bold text-indigo-600">472</h3></div><div class="bg-white p-4 rounded-xl border border-slate-200"><p class="text-[10px] font-bold text-slate-400 uppercase">Pending Tickets</p><h3 class="text-2xl font-bold text-slate-500">74</h3></div></div></div>
-        <div class="border-2 border-dashed border-teal-200 bg-teal-50/10 rounded-2xl p-4 relative"><span class="absolute -top-3 left-4 bg-teal-600 text-white text-[11px] font-extrabold tracking-widest px-3 py-1 rounded-full uppercase">PROD through Service Desk</span><div class="grid grid-cols-3 gap-3 mt-2"><div class="bg-white p-4 rounded-xl border border-slate-200"><p class="text-[10px] font-bold text-slate-400 uppercase">Total PROD</p><h3 class="text-2xl font-bold">70</h3></div><div class="bg-white p-4 rounded-xl border border-slate-200"><p class="text-[10px] font-bold text-slate-400 uppercase">Resolved PROD</p><h3 class="text-2xl font-bold text-emerald-600">26</h3></div><div class="bg-white p-4 rounded-xl border border-slate-200"><p class="text-[10px] font-bold text-slate-400 uppercase">Pending PROD</p><h3 class="text-2xl font-bold text-red-600">44</h3></div></div></div></div>
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6"><div class="bg-white p-6 rounded-xl border border-slate-200"><h4 class="font-bold mb-4">Core Resolution Breakdown (AI)</h4><div id="statusDonutChart"></div></div><div class="bg-white p-6 rounded-xl border border-slate-200"><h4 class="font-bold mb-4">PROD through Service Desk Breakdown</h4><div id="prodResolutionDonutChart"></div></div></div>
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6"><div class="bg-white p-6 rounded-xl border border-slate-200"><h4 class="font-bold mb-4">Critical Attention Required (Oldest Tickets)</h4><table class="w-full text-left border-collapse text-sm"><thead class="bg-slate-50 border-b text-xs font-bold text-slate-400 uppercase"><tr><th class="p-3">Category</th><th class="p-3">Ticket / Task</th><th class="p-3">Status</th><th class="p-3">Created</th></tr></thead><tbody class="divide-y"><tr><td style='font-weight:bold;color:#4f46e5;'>AI</td><td><a href='https://tilemountain.atlassian.net/browse/AI-24818' target='_blank' class='text-blue-600 hover:underline'>AI-24818</a></td><td><span class='bg-slate-100 text-slate-grey px-2 py-1 rounded text-xs font-bold'>In Progress</span></td><td>2026-05-07</td></tr><tr><td style='font-weight:bold;color:#4f46e5;'>AI</td><td><a href='https://tilemountain.atlassian.net/browse/AI-24925' target='_blank' class='text-blue-600 hover:underline'>AI-24925</a></td><td><span class='bg-slate-100 text-slate-grey px-2 py-1 rounded text-xs font-bold'>In Progress</span></td><td>2026-05-12</td></tr><tr><td style='font-weight:bold;color:#ea580c;'>PROD</td><td><a href='https://tilemountain.atlassian.net/browse/PROD-6092' target='_blank' class='text-blue-600 hover:underline'>PROD-6092</a></td><td><span class='bg-teal-50 text-soft-teal px-2 py-1 rounded text-xs font-bold border border-teal-100'>Post Live Testing</span></td><td>2026-05-01</td></tr><tr><td style='font-weight:bold;color:#ea580c;'>PROD</td><td><a href='https://tilemountain.atlassian.net/browse/PROD-6100' target='_blank' class='text-blue-600 hover:underline'>PROD-6100</a></td><td><span class='bg-teal-50 text-soft-teal px-2 py-1 rounded text-xs font-bold border border-teal-100'>Backlog</span></td><td>2026-05-01</td></tr><tr><td style='font-weight:bold;color:#ea580c;'>PROD</td><td><a href='https://tilemountain.atlassian.net/browse/PROD-6110' target='_blank' class='text-blue-600 hover:underline'>PROD-6110</a></td><td><span class='bg-teal-50 text-soft-teal px-2 py-1 rounded text-xs font-bold border border-teal-100'>Backlog</span></td><td>2026-05-02</td></tr></tbody></table></div>
-        <div class="bg-white p-6 rounded-xl border border-slate-200"><h4 class="font-bold mb-4">PROD Distribution by Status (Active View)</h4><table class="w-full text-left border-collapse text-sm"><thead class="bg-slate-50 border-b text-xs font-bold text-slate-400 uppercase"><tr><th class="p-4">PROD-Status</th><th class="p-4 text-center">Count</th><th class="p-4">Associated Ticket IDs</th></tr></thead><tbody class="divide-y"><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>Backlog</span></td><td class='font-bold text-deep-navy text-center'>20</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6100' target='_blank' class='text-blue-600 hover:underline'>PROD-6100</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6110' target='_blank' class='text-blue-600 hover:underline'>PROD-6110</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6127' target='_blank' class='text-blue-600 hover:underline'>PROD-6127</a> <span class='text-slate-400'>...</span></td></tr><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>Developed</span></td><td class='font-bold text-deep-navy text-center'>6</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6099' target='_blank' class='text-blue-600 hover:underline'>PROD-6099</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6187' target='_blank' class='text-blue-600 hover:underline'>PROD-6187</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6215' target='_blank' class='text-blue-600 hover:underline'>PROD-6215</a> <span class='text-slate-400'>...</span></td></tr><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>To Do</span></td><td class='font-bold text-deep-navy text-center'>10</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6096' target='_blank' class='text-blue-600 hover:underline'>PROD-6096</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6117' target='_blank' class='text-blue-600 hover:underline'>PROD-6117</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6147' target='_blank' class='text-blue-600 hover:underline'>PROD-6147</a> <span class='text-slate-400'>...</span></td></tr><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>Waiting For Requirements</span></td><td class='font-bold text-deep-navy text-center'>1</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6166' target='_blank' class='text-blue-600 hover:underline'>PROD-6166</a></td></tr><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>Triage</span></td><td class='font-bold text-deep-navy text-center'>2</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6211' target='_blank' class='text-blue-600 hover:underline'>PROD-6211</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6256' target='_blank' class='text-blue-600 hover:underline'>PROD-6256</a></td></tr></tbody></table></div></div>
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6"><div class="bg-white p-6 rounded-xl border border-slate-200"><h4 class="font-bold mb-2">AI Tickets Volume by Status (Excluding Resolved)</h4><div id="aiTicketStatusHBarChart"></div></div><div class="bg-white p-6 rounded-xl border border-slate-200"><h4 class="font-bold mb-2">PROD Volume Load Chart</h4><div id="prodDistributionHBarChart"></div></div></div>
-        <script>
-        new ApexCharts(document.querySelector("#statusDonutChart"),{series:[472,74],labels:['Resolved Tickets','Pending Tickets'],chart:{type:'donut',height:320},colors:['#4F46E5','#94A3B8'],plotOptions:{pie:{donut:{size:'75%',labels:{show:true,total:{show:true,label:'Resolved %',formatter:function(w){return Math.round((w.globals.seriesTotals[0]/w.globals.seriesTotals.reduce((a,b)=>a+b,0))*100)+"%"}}}}}}}).render();
-        new ApexCharts(document.querySelector("#prodResolutionDonutChart"),{series:[26,44],labels:['Resolved PROD','Pending PROD'],chart:{type:'donut',height:320},colors:['#0D9488','#EF4444'],plotOptions:{pie:{donut:{size:'75%',labels:{show:true,total:{show:true,label:'Resolved %',formatter:function(w){return Math.round((w.globals.seriesTotals[0]/w.globals.seriesTotals.reduce((a,b)=>a+b,0))*100)+"%"}}}}}}}).render();
-        new ApexCharts(document.querySelector("#aiTicketStatusHBarChart"),{series:[{name:'Ticket Volume',data:[44, 21, 7, 2]}],chart:{type:'bar',height:240,toolbar:{show:false}},colors:['#6366F1'],plotOptions:{bar:{horizontal:true,borderRadius:5,barHeight:'50%',dataLabels:{position:'end'}}},xaxis:{categories:['Development Queue', 'In Progress', 'Waiting For Customer', 'Waiting for Support']}}).render();
-        new ApexCharts(document.querySelector("#prodDistributionHBarChart"),{series:[{name:'Ticket Volume',data:[20, 6, 10, 1, 2]}],chart:{type:'bar',height:240,toolbar:{show:false}},colors:['#F59E0B'],plotOptions:{bar:{horizontal:true,borderRadius:5,barHeight:'50%',dataLabels:{position:'end'}}},xaxis:{categories:['Backlog', 'Developed', 'To Do', 'Waiting For Requirements', 'Triage']}}).render();
-        </script></body></html>
+        <!DOCTYPE html>
+        <html class="light" lang="en">
+        <head>
+            <meta charset="utf-8"/>
+            <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+            <meta http-equiv="Pragma" content="no-cache" />
+            <meta http-equiv="Expires" content="0" />
+            
+            <title>Industrial Support Engine Dashboard</title>
+            <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries&v=20260521070753"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+            <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts?v=20260521070753"></script>
+            <script id="tailwind-config">
+                tailwind.config = { theme: { extend: { colors: { "deep-navy": "#0F172A", "slate-grey": "#64748B", "soft-teal": "#0D9488", "muted-coral": "#E11D48", "bg-light": "#F8FAFC", "surface": "#ffffff", "border-light": "#E2E8F0" }, fontFamily: { "inter": ["Inter", "sans-serif"] }, boxShadow: { 'ambient': '0px 4px 20px rgba(15, 23, 42, 0.05)' } } } }
+            </script>
+            <style>
+                .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+                body { background-color: #F8FAFC; font-family: 'Inter', sans-serif; color: #1E293B; }
+                ::-webkit-scrollbar { width: 6px; }
+                ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+            </style>
+        </head>
+        <body class="flex min-h-screen">
+            <div class="flex-1 flex flex-col min-h-screen">
+                <header class="h-24 px-8 bg-surface border-b border-border-light flex justify-between items-center sticky top-0 z-10 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-deep-navy flex items-center justify-center text-white">
+                            <span class="material-symbols-outlined">dashboard</span>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-deep-navy tracking-tight">Service Desk Ticket Status Dashboard</h2>
+                            <p class="text-sm font-medium text-slate-grey mt-0.5">This report range is from <span class="font-semibold text-deep-navy">May 01, 2026</span> to <span class="font-semibold text-deep-navy">May 19, 2026</span></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xs font-bold text-slate-grey uppercase tracking-wider bg-bg-light px-4 py-2 rounded-lg border border-border-light">Generated: May 21, 2026 - 07:07</span>
+                    </div>
+                </header>
+                
+                <main class="p-8 flex-1 space-y-6 max-w-[1440px] mx-auto w-full">
+                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                        <div class="border-2 border-dashed border-indigo-200 bg-indigo-50/20 rounded-2xl p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-indigo-600 text-white text-[11px] font-extrabold tracking-widest px-3 py-1 rounded-full uppercase shadow-sm">AI Tickets</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+                                <div class="bg-surface p-4 rounded-xl shadow-ambient border-b-4 border-deep-navy">
+                                    <p class="text-[10px] font-bold text-slate-grey uppercase tracking-wider mb-1">Total Tickets</p>
+                                    <h3 class="text-2xl font-bold text-deep-navy">546</h3>
+                                </div>
+                                <div class="bg-surface p-4 rounded-xl shadow-ambient border-b-4 border-indigo-600">
+                                    <p class="text-[10px] font-bold text-slate-grey uppercase tracking-wider mb-1">Resolved Tickets</p>
+                                    <h3 class="text-2xl font-bold text-deep-navy">472</h3>
+                                </div>
+                                <div class="bg-surface p-4 rounded-xl shadow-ambient border-b-4 border-slate-400">
+                                    <p class="text-[10px] font-bold text-slate-grey uppercase tracking-wider mb-1">Pending Tickets</p>
+                                    <h3 class="text-2xl font-bold text-deep-navy">74</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-2 border-dashed border-teal-200 bg-teal-50/10 rounded-2xl p-4 relative">
+                            <span class="absolute -top-3 left-4 bg-teal-600 text-white text-[11px] font-extrabold tracking-widest px-3 py-1 rounded-full uppercase shadow-sm">PROD through Service Desk</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-2">
+                                <div class="bg-surface p-4 rounded-xl shadow-ambient border-b-4 border-amber-500">
+                                    <p class="text-[10px] font-bold text-slate-grey uppercase tracking-wider mb-1">Total PROD</p>
+                                    <h3 class="text-2xl font-bold text-deep-navy">70</h3>
+                                </div>
+                                <div class="bg-surface p-4 rounded-xl shadow-ambient border-b-4 border-emerald-600">
+                                    <p class="text-[10px] font-bold text-slate-grey uppercase tracking-wider mb-1">Resolved PROD</p>
+                                    <h3 class="text-2xl font-bold text-deep-navy">26</h3>
+                                </div>
+                                <div class="bg-surface p-4 rounded-xl shadow-ambient border-b-4 border-red-500">
+                                    <p class="text-[10px] font-bold text-slate-grey uppercase tracking-wider mb-1">Pending PROD</p>
+                                    <h3 class="text-2xl font-bold text-deep-navy">44</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-indigo-100 flex flex-col">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="text-lg font-bold text-deep-navy">Core Resolution Breakdown (AI)</h4>
+                            </div>
+                            <div id="statusDonutChart" class="flex-1 w-full flex items-center justify-center mt-4"></div>
+                        </div>
+
+                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-teal-100 flex flex-col">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="text-lg font-bold text-deep-navy">PROD through Service Desk Breakdown</h4>
+                            </div>
+                            <div id="prodResolutionDonutChart" class="flex-1 w-full flex items-center justify-center mt-4"></div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-border-light/60">
+                            <div class="flex justify-between items-center mb-6">
+                                <h4 class="text-lg font-bold text-deep-navy">Critical Attention Required (Oldest Tickets)</h4>
+                                <div class="flex items-center gap-1 text-muted-coral text-sm font-bold bg-red-50 px-3 py-1 rounded-full border border-red-100">
+                                    <span class="material-symbols-outlined !text-[16px]">error</span> Aging Alerts
+                                </div>
+                            </div>
+                            <div class="overflow-hidden border border-border-light rounded-lg">
+                                <table class="w-full text-left border-collapse text-sm">
+                                    <thead class="bg-slate-50 border-b text-xs font-bold text-slate-400 uppercase"><tr><th class="p-3">Category</th><th class="p-3">Ticket / Task</th><th class="p-3">Status</th><th class="p-3">Created</th></tr></thead>
+                                    <tbody class="divide-y"><tr><td style='font-weight:bold;color:#4f46e5;'>AI</td><td><a href='https://tilemountain.atlassian.net/browse/AI-24818' target='_blank' class='text-blue-600 hover:underline'>AI-24818</a></td><td><span class='bg-slate-100 text-slate-grey px-2 py-1 rounded text-xs font-bold'>In Progress</span></td><td>2026-05-07</td></tr><tr><td style='font-weight:bold;color:#4f46e5;'>AI</td><td><a href='https://tilemountain.atlassian.net/browse/AI-24925' target='_blank' class='text-blue-600 hover:underline'>AI-24925</a></td><td><span class='bg-slate-100 text-slate-grey px-2 py-1 rounded text-xs font-bold'>In Progress</span></td><td>2026-05-12</td></tr><tr><td style='font-weight:bold;color:#ea580c;'>PROD</td><td><a href='https://tilemountain.atlassian.net/browse/PROD-6092' target='_blank' class='text-blue-600 hover:underline'>PROD-6092</a></td><td><span class='bg-teal-50 text-soft-teal px-2 py-1 rounded text-xs font-bold border border-teal-100'>Post Live Testing</span></td><td>2026-05-01</td></tr><tr><td style='font-weight:bold;color:#ea580c;'>PROD</td><td><a href='https://tilemountain.atlassian.net/browse/PROD-6100' target='_blank' class='text-blue-600 hover:underline'>PROD-6100</a></td><td><span class='bg-teal-50 text-soft-teal px-2 py-1 rounded text-xs font-bold border border-teal-100'>Backlog</span></td><td>2026-05-01</td></tr><tr><td style='font-weight:bold;color:#ea580c;'>PROD</td><td><a href='https://tilemountain.atlassian.net/browse/PROD-6110' target='_blank' class='text-blue-600 hover:underline'>PROD-6110</a></td><td><span class='bg-teal-50 text-soft-teal px-2 py-1 rounded text-xs font-bold border border-teal-100'>Backlog</span></td><td>2026-05-02</td></tr></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-border-light/60 flex flex-col">
+                            <h4 class="text-lg font-bold text-deep-navy mb-4">PROD Distribution by Status (Active View)</h4>
+                            <div class="overflow-x-auto rounded-xl border border-border-light flex-1">
+                                <table class="w-full text-left border-collapse text-sm">
+                                    <thead class="bg-slate-50 border-b text-xs font-bold text-slate-400 uppercase"><tr><th class="p-4">PROD-Status</th><th class="p-4 text-center">Count</th><th class="p-4">Associated Ticket IDs</th></tr></thead>
+                                    <tbody class="divide-y"><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>Backlog</span></td><td class='font-bold text-deep-navy text-center'>20</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6100' target='_blank' class='text-blue-600 hover:underline'>PROD-6100</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6110' target='_blank' class='text-blue-600 hover:underline'>PROD-6110</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6127' target='_blank' class='text-blue-600 hover:underline'>PROD-6127</a> <span class='text-slate-400'>...</span></td></tr><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>Developed</span></td><td class='font-bold text-deep-navy text-center'>6</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6099' target='_blank' class='text-blue-600 hover:underline'>PROD-6099</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6187' target='_blank' class='text-blue-600 hover:underline'>PROD-6187</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6215' target='_blank' class='text-blue-600 hover:underline'>PROD-6215</a> <span class='text-slate-400'>...</span></td></tr><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>To Do</span></td><td class='font-bold text-deep-navy text-center'>10</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6096' target='_blank' class='text-blue-600 hover:underline'>PROD-6096</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6117' target='_blank' class='text-blue-600 hover:underline'>PROD-6117</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6147' target='_blank' class='text-blue-600 hover:underline'>PROD-6147</a> <span class='text-slate-400'>...</span></td></tr><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>Waiting For Requirements</span></td><td class='font-bold text-deep-navy text-center'>1</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6166' target='_blank' class='text-blue-600 hover:underline'>PROD-6166</a></td></tr><tr><td><span class='bg-slate-100 text-deep-navy px-3 py-1 rounded-full text-xs font-bold border border-border-light'>Triage</span></td><td class='font-bold text-deep-navy text-center'>2</td><td class='text-slate-grey text-sm leading-relaxed'><a href='https://tilemountain.atlassian.net/browse/PROD-6211' target='_blank' class='text-blue-600 hover:underline'>PROD-6211</a>, <a href='https://tilemountain.atlassian.net/browse/PROD-6256' target='_blank' class='text-blue-600 hover:underline'>PROD-6256</a></td></tr></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-indigo-100">
+                            <h4 class="text-lg font-bold text-deep-navy mb-2">AI Tickets Volume by Status (Excluding Resolved)</h4>
+                            <div id="aiTicketStatusHBarChart"></div>
+                        </div>
+                        
+                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-teal-100">
+                            <h4 class="text-lg font-bold text-deep-navy mb-2">PROD Volume Load Chart</h4>
+                            <div id="prodDistributionHBarChart"></div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            
+            <script>
+            new ApexCharts(document.querySelector("#statusDonutChart"),{series:[472,74],labels:['Resolved Tickets','Pending Tickets'],chart:{type:'donut',height:320},colors:['#4F46E5','#94A3B8'],plotOptions:{pie:{donut:{size:'75%',labels:{show:true,total:{show:true,label:'Resolved %',formatter:function(w){return Math.round((w.globals.seriesTotals[0]/w.globals.seriesTotals.reduce((a,b)=>a+b,0))*100)+"%"}}}}}}}).render();
+            new ApexCharts(document.querySelector("#prodResolutionDonutChart"),{series:[26,44],labels:['Resolved PROD','Pending PROD'],chart:{type:'donut',height:320},colors:['#0D9488','#EF4444'],plotOptions:{pie:{donut:{size:'75%',labels:{show:true,total:{show:true,label:'Resolved %',formatter:function(w){return Math.round((w.globals.seriesTotals[0]/w.globals.seriesTotals.reduce((a,b)=>a+b,0))*100)+"%"}}}}}}}).render();
+            new ApexCharts(document.querySelector("#aiTicketStatusHBarChart"),{series:[{name:'Ticket Volume',data:[44, 21, 7, 2]}],chart:{type:'bar',height:240,toolbar:{show:false}},colors:['#6366F1'],plotOptions:{bar:{horizontal:true,borderRadius:5,barHeight:'50%',dataLabels:{position:'end'}}},xaxis:{categories:['Development Queue', 'In Progress', 'Waiting For Customer', 'Waiting for Support']}}).render();
+            new ApexCharts(document.querySelector("#prodDistributionHBarChart"),{series:[{name:'Ticket Volume',data:[20, 6, 10, 1, 2]}],chart:{type:'bar',height:240,toolbar:{show:false}},colors:['#F59E0B'],plotOptions:{bar:{horizontal:true,borderRadius:5,barHeight:'50%',dataLabels:{position:'end'}}},xaxis:{categories:['Backlog', 'Developed', 'To Do', 'Waiting For Requirements', 'Triage']}}).render();
+            </script>
+        </body>
+        </html>
         
