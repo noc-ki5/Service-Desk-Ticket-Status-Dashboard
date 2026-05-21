@@ -8,10 +8,10 @@
             <meta http-equiv="Expires" content="0" />
 
             <title>Industrial Support Engine Dashboard</title>
-            <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries&v=20260521100429"></script>
-            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+            <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries&v=20260521103010"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
             <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-            <script src="https://cdn.jsdelivr.net/npm/apexcharts?v=20260521100429"></script>
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts?v=20260521103010"></script>
             <script id="tailwind-config">
                 tailwind.config = { theme: { extend: { colors: { "deep-navy": "#0F172A", "slate-grey": "#64748B", "soft-teal": "#0D9488", "muted-coral": "#E11D48", "bg-light": "#F8FAFC", "surface": "#ffffff", "border-light": "#E2E8F0" }, fontFamily: { "inter": ["Inter", "sans-serif"] }, boxShadow: { 'ambient': '0px 4px 20px rgba(15, 23, 42, 0.05)' } } } }
             </script>
@@ -20,6 +20,12 @@
                 body { background-color: #F8FAFC; font-family: 'Inter', sans-serif; color: #1E293B; }
                 ::-webkit-scrollbar { width: 6px; }
                 ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+                
+                /* Custom Scrollbar for the new List Component */
+                .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+                .custom-scrollbar::-webkit-scrollbar-track { background: #F1F5F9; border-radius: 10px; }
+                .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
             </style>
         </head>
         <body class="flex min-h-screen">
@@ -35,7 +41,7 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <span class="text-xs font-bold text-slate-grey uppercase tracking-wider bg-bg-light px-4 py-2 rounded-lg border border-border-light">Generated: May 21, 2026 - 10:04</span>
+                        <span class="text-xs font-bold text-slate-grey uppercase tracking-wider bg-bg-light px-4 py-2 rounded-lg border border-border-light">Generated: May 21, 2026 - 10:30</span>
                     </div>
                 </header>
 
@@ -127,14 +133,15 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-purple-100 flex flex-col items-center">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-purple-100 flex flex-col items-center h-full">
                             <h4 class="text-sm font-bold text-slate-grey uppercase tracking-wider mb-4 self-start">Request Categories Distribution</h4>
                             <div id="categoryDonutChart" class="w-full mt-2"></div>
                         </div>
-                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-red-100 flex flex-col items-center">
-                            <h4 class="text-sm font-bold text-slate-grey uppercase tracking-wider mb-4 self-start">Request Types Distribution</h4>
-                            <div id="typeDonutChart" class="w-full mt-2"></div>
+                        
+                        <div class="bg-surface p-6 rounded-xl shadow-ambient border border-red-100 flex flex-col items-center h-full min-h-[460px]">
+                            <h4 class="text-sm font-bold text-slate-grey uppercase tracking-wider mb-4 self-start">Request Types Breakdown</h4>
+                            <div id="typeListContainer" class="w-full mt-2 flex-1"></div>
                         </div>
                     </div>
 
@@ -142,8 +149,7 @@
             </div>
 
             <script>
-            // 100% CLEAN LEGEND FIX: NO MORE HIDDEN ORPHAN DOTS, NO MORE EXTRA PERCENTAGES
-            // ALL Categories will explicitly show mapping strictly as "Label: Count"
+            // Setup Base Config
             const baseDonutOptions = {
                 chart: { type: 'donut', height: 420 },
                 dataLabels: { 
@@ -157,8 +163,6 @@
                     fontSize: '12px',
                     fontFamily: 'Inter',
                     fontWeight: 500,
-                    // Returns Clean Label mapping exactly to your image: "Category Name: Count"
-                    // WITHOUT any percentage or hidden condition logic. ALL labels will render purely.
                     formatter: function(seriesName, opts) {
                         var countValue = opts.w.globals.series[opts.seriesIndex];
                         return seriesName + ": " + countValue; 
@@ -166,32 +170,58 @@
                 }
             };
 
+            // 1. AI Resolution Donut
             new ApexCharts(document.querySelector("#statusDonutChart"), {
                 ...baseDonutOptions, series: [473, 73], labels: ['Resolved Tickets', 'Pending Tickets'],
                 colors: ['#4F46E5', '#94A3B8'],
                 plotOptions: { pie: { donut: { size: '75%', labels: { show: true, total: { show: true, label: 'Resolved %', formatter: w => Math.round((w.globals.seriesTotals[0]/w.globals.seriesTotals.reduce((a,b)=>a+b,0))*100)+"%" } } } } }
             }).render();
 
+            // 2. PROD Resolution Donut
             new ApexCharts(document.querySelector("#prodResolutionDonutChart"), {
                 ...baseDonutOptions, series: [27, 43], labels: ['Resolved PROD', 'Pending PROD'],
                 colors: ['#0D9488', '#EF4444'],
                 plotOptions: { pie: { donut: { size: '75%', labels: { show: true, total: { show: true, label: 'Resolved %', formatter: w => Math.round((w.globals.seriesTotals[0]/w.globals.seriesTotals.reduce((a,b)=>a+b,0))*100)+"%" } } } } }
             }).render();
 
+            // 3. Categories Donut
             new ApexCharts(document.querySelector("#categoryDonutChart"), {
                 ...baseDonutOptions, series: [255, 188, 54, 32, 12, 4, 1], labels: ['Bug', 'IT Support Requests', 'Change Request', 'Form', 'Dynamic Inspire', 'Reporting', 'Uncategorized'],
                 colors: ['#8B5CF6', '#EC4899', '#3B82F6', '#10B981', '#F59E0B', '#64748B', '#0ea5e9', '#f43f5e', '#f97316'],
                 plotOptions: { pie: { donut: { size: '75%', labels: { show: true, total: { show: true, label: 'Total Classified', formatter: w => w.globals.seriesTotals.reduce((a,b)=>a+b,0) } } } } }
             }).render();
 
-            new ApexCharts(document.querySelector("#typeDonutChart"), {
-                ...baseDonutOptions, series: [199, 81, 44, 39, 30, 25, 19, 19, 16, 16, 13, 10, 9, 8, 6, 4, 3, 3, 2], labels: ['Magneto Issue', 'Software Request', 'Backend Change', 'Magneto Bug', 'Hardware Request', 'Frontend Change', 'Joining Form', 'NAV Issues', 'Email issues', 'Manual Shipment', 'VPN Requests', 'Role Change', 'Undefined Type', 'Power BI', 'Internet not working', 'Leaving Form', 'Web Content', 'Printer Issues', 'Data Issue'],
-                colors: ['#EF4444', '#F97316', '#EAB308', '#84CC16', '#22C55E', '#06B6D4', '#3B82F6', '#8B5CF6', '#EC4899', '#94a3b8', '#14b8a6', '#8b5cf6'],
-                plotOptions: { pie: { donut: { size: '75%', labels: { show: true, total: { show: true, label: 'Total Classified', formatter: w => w.globals.seriesTotals.reduce((a,b)=>a+b,0) } } } } }
-            }).render();
-
+            // 4. Horizontal Bar Charts
             new ApexCharts(document.querySelector("#aiTicketStatusHBarChart"),{series:[{name:'Ticket Volume',data:[44, 20, 7, 2]}],chart:{type:'bar',height:260,toolbar:{show:false}},colors:['#6366F1'],plotOptions:{bar:{horizontal:true,borderRadius:5,barHeight:'50%',dataLabels:{position:'end'}}},xaxis:{categories:['Development Queue', 'In Progress', 'Waiting For Customer', 'Waiting for Support']}}).render();
             new ApexCharts(document.querySelector("#prodDistributionHBarChart"),{series:[{name:'Ticket Volume',data:[20, 6, 10, 1, 2]}],chart:{type:'bar',height:260,toolbar:{show:false}},colors:['#F59E0B'],plotOptions:{bar:{horizontal:true,borderRadius:5,barHeight:'50%',dataLabels:{position:'end'}}},xaxis:{categories:['Backlog', 'Developed', 'To Do', 'Waiting For Requirements', 'Triage']}}).render();
+
+            // =========================================================
+            // 🚀 NEW FEATURE: DYNAMIC COLORED LIST FOR REQUEST TYPES
+            // =========================================================
+            (function() {
+                const typeLabels = ['Magneto Issue', 'Software Request', 'Backend Change', 'Magneto Bug', 'Hardware Request', 'Frontend Change', 'Joining Form', 'NAV Issues', 'Email issues', 'Manual Shipment', 'VPN Requests', 'Role Change', 'Undefined Type', 'Power BI', 'Internet not working', 'Leaving Form', 'Web Content', 'Printer Issues', 'Data Issue'];
+                const typeCounts = [199, 81, 44, 39, 30, 25, 19, 19, 16, 16, 13, 10, 9, 8, 6, 4, 3, 3, 2];
+                const typeColors = ['#EF4444', '#F97316', '#EAB308', '#84CC16', '#22C55E', '#06B6D4', '#3B82F6', '#8B5CF6', '#EC4899', '#94a3b8', '#14b8a6', '#8b5cf6'];
+                
+                let typeListHTML = '<div class="grid grid-cols-1 xl:grid-cols-2 gap-3 w-full pr-2 overflow-y-auto max-h-[380px] custom-scrollbar">';
+                
+                for(let i=0; i<typeLabels.length; i++) {
+                    let color = typeColors[i % typeColors.length];
+                    typeListHTML += `
+                    <div class="flex items-center justify-between p-3 rounded-lg border border-slate-200/60 bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <div class="flex items-center gap-2.5 overflow-hidden">
+                            <span class="w-3 h-3 flex-shrink-0 rounded-full shadow-sm" style="background-color: ${color};"></span>
+                            <span class="text-[13px] font-bold text-deep-navy truncate tracking-tight" title="${typeLabels[i]}">${typeLabels[i]}</span>
+                        </div>
+                        <span class="text-xs font-extrabold text-slate-600 bg-white px-2.5 py-1 rounded-md shadow-sm border border-slate-200/60">${typeCounts[i]}</span>
+                    </div>`;
+                }
+                typeListHTML += '</div>';
+                
+                // Inject the generated HTML into the placeholder container
+                let container = document.querySelector("#typeListContainer");
+                if(container) { container.innerHTML = typeListHTML; }
+            })();
             </script>
         </body>
         </html>
